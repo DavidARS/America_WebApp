@@ -1,0 +1,17 @@
+/* Disable iPad touch menu, selection/copy, custom css buttons */
+* {
+	/* Disable touch menu */
+    -webkit-touch-callout: none; 
+    /* Disable selection/copy */
+    -webkit-user-select: none;
+    /* Disable custom css buttons */
+    -webkit-appearance: none;
+}
+/* Hide highcharts context menu on iPad*/
+.highcharts-button{
+  display: none;
+}
+
+.no-close .ui-dialog-titlebar-close {
+	display: none;
+}

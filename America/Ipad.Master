@@ -1,0 +1,328 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Ipad.Master.cs" Inherits="WaterSimUI.IpadMaster" %>
+<!--I removed a double ++ in front of the above line, 01.31.17 das-->
+<%@ Register src="UserControls/InputUserControl.ascx" tagname="InputUserControl" tagprefix="Wsmi" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> - WaterSim America (WSA)</title>
+    <asp:PlaceHolder runat="server">     
+          <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>  
+    <webopt:BundleReference runat="server" Path="~/Content/css" /> 
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <%-- STEPTOE EDIT BEGIN 11/08/15: Added Chosen --%>
+    <%--<link href="Scripts/Chosen/chosen.css" rel="stylesheet" >--%>
+    <%-- STEPTOE EDIT END --%>
+
+    <%--<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />--%>
+    <%--<link href="Content/themes/base/Gear.tooltip.css" rel="stylesheet" />--%>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+  <br>
+       <div id="WSLoading" style="height:100%;width:100%; background-color:#e6e6e6" >
+         <div style="height:50px;width: 1px; background-color:#000000"><hr /></div>
+         <div style="font-size:80px;color:black;text-align:center; height:100px; vertical-align:middle"> Loading</div>
+         <div style="font-size:60px;color:black;text-align:center; height:100px; vertical-align:middle"> WaterSim America</div>
+         <div style="text-align:center;">
+           <p><img src="Images/ASU_DCDC_3_20_2017.png" style="vertical-align:middle; width:400px" /></p>
+          </div>
+       </div>
+
+     <%--    <div style="text-align:center;background-color:#e6e6e6">
+           <p><img src="Images/DCDC_CMYK_Aug21_2013.png" style="vertical-align:middle; width:400px" /></p>
+           <div style="color: black; font-size:22px; height:40px; vertical-align:middle">A Research Center Affiliate of the: </div>
+           <p><img src="Images/wrigley_2.png" style="vertical-align:middle; width:400px" /></p>
+
+          </div>--%>
+     <%--  </div>--%>
+
+    <form runat="server" id="MainForm" style="display:normal;height:100%;"> 
+
+        <asp:ScriptManager runat="server">
+             <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=272931&clcid=0x409 --%>
+                <%--Framework Scripts--%>
+            
+               <%-- <asp:ScriptReference Name="MsAjaxBundle" />--%>
+                <%--<asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />--%>
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+               <%-- <asp:ScriptReference Name="WebFormsBundle" />--%>
+                <%--Site Scripts--%>   
+
+             </Scripts>
+        </asp:ScriptManager>
+    
+    
+    <div id="containment-wrapper">     
+    <!-- Full screen mode -->
+     <div id="container" style="height:100%;">
+       <div id="specialstuff" style="height:100%;">
+    <!-- End -->
+        <div class="wrapper">
+            <div id="dragResize-dashboard-off" class="click-to-top">
+           <%-- <div class="marquee-a">
+              <span>Attempt to balance your water system (minimize </span><span style="color:red ">RED </span><span> deficits).</span> 
+                <span>.  .  .  .  .  .  .  .  .  .  .  .</span>
+                <span>Choose policies (left panel) to manage water supplies and water demand.</span>
+            </div>
+            <div class="marquee-b">
+              <span>Attempt to balance your water system (minimize </span><span style="color:red ">RED </span><span> deficits).</span> 
+                <span>.  .  .  .  .  .  .  .  .  .  .  .</span>
+                <span>Choose policies (left panel) to manage water supplies and water demand.</span>
+            </div>--%>
+          
+	        <header  class="header">
+                  <div class="dashboard-header-container">
+                  <div class="dashboard-header" >
+                     <h1 id="dashboard-header-h1">  Sustainability <Br />Indicators</h1> 
+                  </div>
+                   </div>
+                  <div class="wrapAccordion">
+                  <article class="accordion">
+
+<%--                      <img style="width:225px; margin-left:10px;margin-top:10px;margin-bottom:5px;"  src ="Images/placeholder_indicator.png"/>
+                    <%--<section id="acc1">
+	                <section id="acc5">
+                         <div  class="ICwrapper">
+                              <div id="SI_AWS_IHelpControlContainer" class="help" data-key="SI_AWS">
+                                  <h2 id="idAWSDiv" class ="IndicatorControl" data-fld="SINYRGWR">
+                                      Population
+                                  </h2>
+                                  </div>
+                             </div>
+                       <h3 id="idAWSDiv_OLD" class ="IndicatorControl_OLD" data-fld="SINYRGWR"> </h3>
+                    </section>--%>    
+                </article>
+               </div>
+
+	        </header><!-- .header-->
+            </div>
+                
+  	        <div class="middle">        
+		        <div class="container">
+                    <div class="content">
+                        <section class="content-wrapper main-content clear-fix">
+                            <asp:ContentPlaceHolder runat="server" ID="GraphControls" />
+                        </section>
+      
+			        </div><!-- .content -->
+		        </div><!-- .container-->
+		        <div id="dragResize-policies-off" class="click-to-top">
+                <aside id="left-title">
+                      <div class="TheState">
+                              <!--<h2 style="display: block; left: auto; " id="dashboard-header-h0">Florida</h2> -->
+                              <h2 id="dashboard-header-h0">Florida</h2> 
+                           
+                      </div>
+
+                </aside>
+                <aside id="left-sidebar">
+                    <asp:Panel ID="PanelUserInputs" runat="server">
+ 
+
+                         
+                          <h1 style="display: block; left: auto; font-size:x-large;  padding: 0 0 5px 0;">Policy Controls</h1><p></p>
+                         
+
+                        <Wsmi:InputUserControl ID="UCONInputUserControl" FieldKeyWord="UCON" runat="server" />
+                        <Wsmi:InputUserControl ID="AGCONInputUserControl" FieldKeyWord="AGCON" runat="server" />
+                        <Wsmi:InputUserControl ID="PCONInputUserControl" FieldKeyWord="PCON" runat="server" />
+                        <Wsmi:InputUserControl ID="ICONInputUserControl" FieldKeyWord="ICON" runat="server" />
+                        <Wsmi:InputUserControl ID="SWMInputUserControl" FieldKeyWord="SWM" runat="server" />
+                        <Wsmi:InputUserControl ID="GWMInputUserControl" FieldKeyWord="GWM" runat="server" />
+                        <Wsmi:InputUserControl ID="RECMInputUserControl" FieldKeyWord="RECM" runat="server" />
+
+                         <Wsmi:InputUserControl ID="POPInputUserControl" FieldKeyWord="POPGR" runat="server" />
+ 
+                        <asp:HiddenField ID="hvJSONData" runat="server" />
+                    </asp:Panel>
+            
+		        </aside><!-- .left-sidebar -->
+                    
+                </div>
+ 
+	        </div><!-- .middle-->
+
+ <%--           <div class="marquee-e" style="float:left; position:absolute; width:700px ; height:200px; background-color: black; color: white;">  Something</div>
+            <div class="marquee-c">
+                <span>Attempt to balance your water system (minimize </span><span style="color:red ">RED </span><span> deficits).</span> 
+                <span>.  .  .  .  .  .  .  .  .  .  .  .</span>
+                <span>Choose policies (left panel) to manage water supplies and water demand.</span>
+                
+             </div>
+             <div class="marquee-d">
+               <span>Attempt to balance your water system (minimize </span><span style="color:red ">RED </span><span> deficits).</span> 
+                <span>.  .  .  .  .  .  .  .  .  .  .  .</span>
+                <span>Choose policies (left panel) to manage water supplies and water demand.</span>
+             </div>--%>
+            <footer class="footer">
+ <%--              <div id="pageslide-button-container">
+                <a href="#pageslide-button">
+                   <!-- <img id="openGear" class="gear-button" src="Images/gear_icon.png" width="32" height="32" Title=""/> -->
+                </a>
+               </div>--%>
+                <%-- QUAY EDIT 3/19/16  BEGIN --%>
+                <div id="idGoodJob" style="float: left; margin: 5px;  height: 40px; width: 100px; text-align:center; padding-top: 5px; background-color: lightgrey; font-family:Arial; font-size: 30px;"> <span style="display:inline-block;vertical-align:middle;line-height:normal;"></span></div>
+                <input type="button" class="run-model" id="run-model-Main" value="Run Model" style="margin: 5px;  height: 40px; width: 200px; text-align:center; padding: 1px; background-color: lightgrey; font-family:Arial; font-size: 30px;"/>
+                <%--<img src="Images/RunModelGrey.png" class="run-model" id="run-model-Main" />--%>
+                <%-- QUAY EDIT 3/19/16  END --%>
+
+                <div class="feedback">
+
+                <div class ="version">
+                   <img src="Images/ASU_DCDC_3_20_2017.png" height="40" width= "122" >
+                </div>
+                <div class ="version">
+                   <div id="UI" class="APIversion"></div>
+                   <div id="Web" class="APIversion"></div>
+                  </div>
+                 <div class="version"></div>
+                 <div class ="version">
+                  <div id="Version" class="APIversion"></div>
+                   <div id="Model" class="APIversion"></div>
+
+                 </div>
+                 <div class="version">
+                        <img src="Images/nsf1.png" width="45" height="45">
+                 </div>
+                 <div class ="finish" style="width: 250px;">
+<%--                     QUAY EDIT 3/19/16  BEGIN --%>
+<%--                     STEPTOE EDIT 4/14/17  BEGIN --%>
+                    <input type="button" id="Restart_button" class="Continue" value="Restart Game" style="margin: 5px;  height: 40px; width: 230px; text-align:center; padding: 1px; float:left; background-color: #40FF40; font-family:Arial; font-size: 28px; display: none;"/>
+<%--                     STEPTOE EDIT 4/14/17  END --%>
+                     <input type="button" id="Finish_button" class="Continue" value="Next Challenge" style="margin: 5px;  height: 40px; width: 230px; text-align:center; padding: 1px; float:left ; background-color: lightgrey; font-family:Arial; font-size: 28px;"/>
+<%--                  <img src="Images/RunModelGrey.png" id="Finish_button" class="Continue"></>--%>
+<%--                     QUAY EDIT 3/19/16  BEGIN --%>
+                 
+                 </div>   
+               </div>
+                 <!-- end DAS--> 
+            </footer><!-- .footer -->
+
+         </div><!-- .wrapper -->
+    
+    <!-- Decision Theater mode -->
+    </div><!-- .specialstuff -->
+    <div id="decision-theater-right-no-dt">
+        <div id="drop-right-no-dt" class="fbox"></div>
+    </div>
+    <!-- End -->
+         <div id="pageslide">
+            <h1>Settings</h1>
+
+          <%--  <div id="settings-tabs-geography">--%> 
+                <!-- DAS -->
+                <div id="settings-button-container-ipad">
+          <%--      <a href="#pageslide-button"><img id="closeGear" class="gear-button" src="Images/gear_icon.png" width="24" height="24" title="" /></a>--%>
+                    <a href="#pageslide-button"><img id="closeGear" class="gear-button" src="Images/gear_icon.png" width="24" height="24" title="" /></a>
+                </div>
+            <%--QUAY EDIT 3/19/16 Begin--%>
+             
+             <div id="idDebugControls" style="font-size:20px">
+                 <p style="font-size:24px">Debug Controls<br /></p>
+                 <div style="height:80px">
+                   <p><br />Select New State
+                   <Select id="idSelectState" name="State" style="font-size:16px">
+                     <option value="Florida">Florida</option>
+                     <option value="Idaho">Idaho</option>
+                     <option value="Illinois">Illinois</option>
+                     <option value="Minnesota">Minnesota</option>
+                     <option value="Wyoming">Wyoming</option>
+                   </Select>
+                   </p>
+               </div>
+                <%-- <div style="height:80px">
+                 <p>Select Marquee Display<br />
+                 <select id= "idSetDiv">
+                     <option value="0"> No Marquee</option>
+                     <option value="1"> Top Moving</option>
+                     <option value="2"> Top Static</option>
+                     <option value="3"> Bottom Moving</option>
+                     <option value="4"> Bottom Static</option>
+                     <option value="5"> Wierd</option>
+                 </select>
+                 </p>
+                 </div>--%>
+                 <div style="height:120px; vertical-align:middle">
+                     <p> Show 2015 : <input type="button" id="id2015Button" value="Run To 2015" /></p>
+                 </div>
+             </div>
+
+           <%--QUAY EDIT 3/19/16 Begin--%>
+                   <%-- <ul>
+                        <li><a href="#settings-tabs-geography-1">Temporal</a></li>
+                        <li><a href="#settings-tabs-geography-2">Geography</a></li>
+                    </ul>--%>
+
+
+               <%--  </div>--%>
+                </div>
+
+                 <%--<Wsmi:InputUserControl ID="WaterBanking" FieldKeyWord="PCSWWB" runat="server" />--%>
+ 
+               <%-- </div>--%>
+            
+
+            <!-- Slider for colorado river flow climate adjustment. This changes the graphs within the trace area under the climate tab.  -->
+            <!-- Same for Salt-Verde -->
+
+             <%--<div id="settings-tabs-scenarios">
+
+                    <ul>
+                        <li><a href="#settings-tabs-scenarios-1">Scenario:Base</a></li>
+                        <li><a href="#settings-tabs-scenarios-2">Scenario:Derived</a></li>
+                    </ul>
+
+                    <div id="settings-tabs-scenarios-1">
+                        <ul>
+                            <li><input type="button" id="loadBSbutton" class="button" name="base-scenario-button" value="Load Base Scenario"/></li>
+                        </ul>
+                    </div>
+
+                    <div id="settings-tabs-scenarios-2">
+                        <ul id="adj-scenarios-list">
+                            Oops!!! No Saved Scenarios...
+                        </ul>
+                        <input type="button" id="loadASbutton" class="button" name="saved-scenario-button" value="Load Saved Scenario"/>
+                    </div>
+                <input type="button" value="Save Scenario" id="savebutton" class="button" /style="width:247px; margin-left: 10px">
+                <input type="button" value="Create New Scenario" id="createbutton" class="button" / style="width:247px; margin-left: 10px">
+              </div>--%>
+
+               <%--<div style="border:solid 2px #990033; width:200px; margin-left: 30px">
+            <!-- QUAY EDIT 6/30/14 ---------------------------------------------> 
+            <input type="button" value="Create Report" id="ReportButton" class="button"/style="margin-left:5px" >
+             <!-- END QUAY EDIT 6/30/14 ------------------------------------- -->    
+             <!--   <input type="button" value="Expand Window" id="OpenNew" class="button"/>-->            
+             </div>--%>
+ 
+	</div> <!-- .container-->
+
+    </div> <!-- .containment-wrapper-->
+
+    <%--<div id="dialog" title="Saving Scenario" style="display:none; text-align:center;">
+        <strong>Enter Scenario Name:</strong><br />
+        <input id="tbdialogScenarioName" type="text" style="background-color:#4F5557; color:white;"/>
+    </div>--%>
+<%--</div>--%>
+        
+
+    </form>
+  </body>
+</html>
